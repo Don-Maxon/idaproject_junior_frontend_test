@@ -1,5 +1,5 @@
 <template>
-  <form action="" id="add_product_form">
+  <form action="" id="add_product_form" onsubmit="return false">
     <label for="name_product_input" class="required">Наименование товара</label>
     <input type="text" id="name_product_input" class="form_item item_height" placeholder="Введите наименование товара">
     <label for="product_description_textarea" >Описание товара</label>
@@ -38,19 +38,30 @@ $placeholder-text-color:  #B4B4B4;
   height: 13px;
 }
 
-#add_product_form .form_item{
+#add_product_form .item_height{
+    height: 36px;
+}
+
+.form_item{
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
-    border: none;
+    border: 0px;
+    outline:none;
     font-size: 12px;
     line-height: 15px;
     text-align: left;
     padding: 10px 16px;
     margin-bottom: 16px;
+    transition: .3s box-shadow;
 }
 
-#add_product_form .item_height{
-    height: 36px;
+.form_item:hover{
+    box-shadow:0 0 4px rgba(0,0,0,0.5);
+}
+
+.form_item:focus{
+    border: 1px solid #95959e;
+    box-shadow:0 0 4px rgba(0,0,0,0.5);
 }
 
 .form_item::placeholder{
@@ -78,6 +89,19 @@ $placeholder-text-color:  #B4B4B4;
     font-size: 12px;
     line-height: 15px;
     color: $placeholder-text-color;
+    transition: .3s background-color;
+    transition: 1s box-shadow;
+}
+
+#add_product_btn:hover{
+    background-color: #e0dddd;
+    cursor: pointer;
+}
+
+#add_product_btn:active{
+    transition: .3s background-color;
+    transition: .3s box-shadow;
+    box-shadow: inset -2px -2px 15px rgba(0, 0, 0, 0.1);
 }
 
 .required::after {
