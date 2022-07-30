@@ -12,8 +12,11 @@
     <aside class="sidebar">
       <product-form/>
     </aside>
-    <main class="main">
-      <div>main</div>
+    <main>
+
+      <div v-for="i in 4" :key="i">
+        <product-card />
+      </div>
     </main>
   </div>
 </div>
@@ -22,10 +25,11 @@
 
 <script>
 import ProductForm from "./components/ProductForm.vue"
+import ProductCard from "./components/ProductCard.vue"
 
 export default {
   name: 'App',
-  components: {ProductForm}
+  components: {ProductForm, ProductCard}
 }
 </script>
 
@@ -84,7 +88,8 @@ aside{
 
 main{
   max-width: 1044px;
-  // background: green;
+  padding-left: 16px;
+  background: green;
    flex: 1;
 }
 
