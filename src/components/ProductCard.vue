@@ -1,5 +1,8 @@
 <template>
         <div class="card_wrapper">
+                <div class="delete_icon" @click="deleteItem">
+                        <img src="../assets/pages/trash_item.png" alt="">
+                </div>
                 <div class="img_wrapper"> 
                         <img src="../assets/pages/default_card_picture.png" alt="">
                 </div>
@@ -17,11 +20,21 @@
 <script>
 export default {
         name: 'ProductCard',
+        data() {
+                return { }      
+        
+        },
+        methods:{
+                deleteItem(){
+                        console.log('delete');
+                }
+        }
 }
 </script>
 
 <style lang="scss">
-.card_wrapper{     
+.card_wrapper{    
+        position: relative; 
         width: 332px;
         height: 423px;
         background: #FFFEFB;
@@ -29,10 +42,16 @@ export default {
         border-radius: 4px;
         display: inline-flex;
         flex-direction: column;
+        visibility: visible;
 }
 
 .card_wrapper:hover{
         cursor: pointer;
+}
+
+.card_wrapper:hover .delete_icon{
+        visibility: visible;
+        opacity: 1;
 }
 
 .card_wrapper h3{
@@ -73,5 +92,32 @@ export default {
         font-weight: 600;
         font-size: 24px;
         line-height: 30px;
+}
+
+.delete_icon{
+        right: -8px;
+        top: -8px;
+        position: absolute;
+        width: 32px;
+        height: 32px;
+        background: #FF8484;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        visibility: hidden;
+        opacity: 0;
+        transition: background .5s, opacity .5s;
+        // transition: 1s opacity;
+
+   
+}
+
+.delete_icon:hover{
+        cursor: pointer;
+        background: #ed2121;
+        visibility: hidden;
+        opacity: 1;       
 }
 </style>

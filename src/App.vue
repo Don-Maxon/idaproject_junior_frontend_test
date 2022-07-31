@@ -89,7 +89,7 @@ aside{
 main{
   max-width: 1044px;
   // padding-left: 16px;
-  background: green;
+  // background: green;
   flex: 1;
   display: flex;
   flex-wrap: wrap;
