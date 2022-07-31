@@ -38,6 +38,7 @@ export default {
 $text-color: #3F3F3F;
 $body-bg-color: #E5E5E5;
 
+
 * {
   box-sizing: border-box;
 }
