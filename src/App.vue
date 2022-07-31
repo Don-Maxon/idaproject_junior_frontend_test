@@ -89,30 +89,28 @@ aside{
 main{
   max-width: 1044px;
   // padding-left: 16px;
-  // background: green;
+  background: green;
   flex: 1;
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start
+  justify-content: space-between;
+  // justify-content: flex-end;
+
+  padding-left: auto;
+  
 }
 
 .product_wrapper{
   margin-left: 16px;
-  // margin-right: auto;
   margin-bottom: 16px;
 
 }
 
-
-.product_wrapper{
- display : inline-block;
-margin-bottom: 16px;
-margin-left: auto;
-background: #E76D13;
-vertical-align: top;
-text-align: center;
-
+.product_wrapper:last-of-type{
+  margin-right: auto;
 }
+
+
 
 
 </style>
