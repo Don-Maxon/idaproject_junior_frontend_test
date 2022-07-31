@@ -7,14 +7,27 @@
     <label for="url_img_input" class="required">Ссылка на изображение товара</label>
     <input type="url" id="url_img_input" class="form_item item_height"  placeholder="Введите ссылку">
     <label for="price_input" class="required">Ссылка на изображение товара</label>
-    <input type="text" id="price_input" class="form_item item_height" placeholder="Введите цену">
+    <input type="text" id="price_input" class="form_item item_height" placeholder="Введите цену" :model-modifiers="{ number: true }" v-model.lazy="prisce" v-money3="prisce_config">
     <button id="add_product_btn" class="item_height"> Добавить товар</button>
 </form>
 </template>
 
 <script>
+
 export default {
     name: 'ProductForm',
+    
+    data(){ 
+        return {
+            prisce_config: {
+                masked: false,
+                thousands: ' ',
+                precision: 0, 
+                allowBlank: true,   
+            },
+            prisce: null,
+        }
+    }
 }
 </script>
 
