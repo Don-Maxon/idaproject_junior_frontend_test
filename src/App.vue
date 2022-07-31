@@ -2,11 +2,7 @@
 <div class="container">
   <div class="top_bar"> 
   <h1>Добавление товара</h1> 
-    <select name="sort_select" id="sort_select">
-      <option>По цене min</option>
-      <option>По цене max</option>
-      <option>По наименованию</option>
-    </select>
+    <sort-select/>
   </div>
   <div class="aside_main_wrapper">
     <aside class="sidebar">
@@ -26,10 +22,11 @@
 <script>
 import ProductForm from "./components/ProductForm.vue"
 import ProductCard from "./components/ProductCard.vue"
+import SortSelect from "./components/SortSelect.vue"
 
 export default {
   name: 'App',
-  components: {ProductForm, ProductCard}
+  components: {ProductForm, ProductCard, SortSelect}
 }
 </script>
 
