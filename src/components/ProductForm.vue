@@ -1,22 +1,75 @@
 <template>
   <form action="" id="add_product_form" onsubmit="return false">
-    <label for="name_product_input" class="required">Наименование товара</label>
-    <input type="text" id="name_product_input" class="form_item item_height" placeholder="Введите наименование товара">
-    <label for="product_description_textarea" >Описание товара</label>
-    <textarea name="product_description_textarea" id="product_description_textarea" class="form_item" placeholder="Введите описание товара"></textarea>
-    <label for="url_img_input" class="required">Ссылка на изображение товара</label>
-    <input type="url" id="url_img_input" class="form_item item_height"  placeholder="Введите ссылку">
-    <label for="price_input" class="required">Ссылка на изображение товара</label>
-    <input type="text" id="price_input" class="form_item item_height" placeholder="Введите цену" :model-modifiers="{ number: true }" v-model.lazy="prisce" v-money3="prisce_config">
-    <button id="add_product_btn" class="item_height"> Добавить товар</button>
+    <div class="normal_item_wrapper">
+        <label for="name_product_input" class="required">Наименование товара</label>
+        <input 
+            type="text" 
+            id="name_product_input" 
+            class="form_item item_height" 
+            placeholder="Введите наименование товара"
+            v-model="product_name"
+            :class="{ 'is_invalid': v$.product_name.$error }"
+        >
+        <div v-show="v$.product_name.$error" class="is_invalid_massage">Поле является обязательным</div>
+    </div>
+    <div class="hight_item_wrapper">
+        <label for="product_description_textarea" >Описание товара</label>
+        <textarea 
+            name="product_description_textarea" 
+            id="product_description_textarea" 
+            class="form_item" 
+            placeholder="Введите описание товара"
+            v-model="description"
+
+        ></textarea>
+    </div>
+    <div class="normal_item_wrapper">
+        <label for="url_img_input" class="required">Ссылка на изображение товара</label>
+        <input 
+            type="url" 
+            id="url_img_input" 
+            class="form_item item_height"  
+            placeholder="Введите ссылку"
+            v-model="img_url"
+            :class="{ 'is_invalid': v$.img_url.$error }"
+        >
+        <div v-show="v$.img_url.$error" class="is_invalid_massage">Поле является обязательным</div>
+    </div>
+    <div class="normal_item_wrapper">
+        <label for="price_input" class="required">Цена товара</label>
+        <input 
+            type="text" 
+            id="price_input" 
+            class="form_item item_height" 
+            placeholder="Введите цену" 
+            :model-modifiers="{ number: true }" 
+            v-model.lazy="prisce" 
+            v-money3="prisce_config"
+            :class="{ 'is_invalid': v$.prisce.$error }"
+        >
+        <div v-show="v$.prisce.$error" class="is_invalid_massage">Поле является обязательным</div>
+    </div>
+    
+    <button  
+        class="item_height add_product_btn" 
+        :disabled="v$.$error"
+        @click="addProduct"
+        :class="{ 'disabled_btn': v$.$error, 'active_btn': !v$.$error}"
+    >
+        Добавить товар
+    </button>
 </form>
 </template>
 
 <script>
+import useVuelidate from '@vuelidate/core'
+import { required, url  } from '@vuelidate/validators'
 
 export default {
     name: 'ProductForm',
-    
+    setup () {
+        return { v$: useVuelidate(),   }
+    },
     data(){ 
         return {
             prisce_config: {
@@ -25,7 +78,27 @@ export default {
                 precision: 0, 
                 allowBlank: true,   
             },
+            product_name: "",
+            description: "",
+            img_url: "",
             prisce: null,
+        }
+    },
+    validations () {
+        return {
+            product_name: { required }, 
+            img_url: { required, url },
+            prisce: { required }
+        
+        }
+    },
+    methods: {
+        addProduct(){
+            this.v$.$touch();
+
+            if(!this.v$.$error){
+                console.log("валидно");
+            }
         }
     }
 }
@@ -64,7 +137,6 @@ $placeholder-text-color:  #B4B4B4;
     line-height: 15px;
     text-align: left;
     padding: 10px 16px;
-    margin-bottom: 16px;
     transition: .3s box-shadow;
 }
 
@@ -90,7 +162,7 @@ $placeholder-text-color:  #B4B4B4;
     height: 108px;
 }
 
-#add_product_btn{
+.add_product_btn{
     text-align: center;
     margin-top: 8px;
     background: #EEEEEE;
@@ -106,16 +178,30 @@ $placeholder-text-color:  #B4B4B4;
     transition: 1s box-shadow;
 }
 
-#add_product_btn:hover{
+.add_product_btn:hover{
     background-color: #e0dddd;
     cursor: pointer;
 }
 
-#add_product_btn:active{
+.add_product_btn:active{
     transition: .3s background-color;
     transition: .3s box-shadow;
     box-shadow: inset -2px -2px 15px rgba(0, 0, 0, 0.1);
 }
+
+.active_btn{
+    
+}
+
+.disabled_btn{
+    cursor: default;
+}
+
+.disabled_btn:hover{
+    cursor: default;
+}
+
+
 
 .required::after {
 width: 4px; 
@@ -127,4 +213,32 @@ display: inline-block;
 margin-bottom: 5px;
 }
 
+.is_invalid{
+    border: 1px solid #FF8484;
+}
+
+.is_invalid_massage{
+    font-size: 8px;
+    line-height: 10px;
+    letter-spacing: -0.02em;
+    color: #FF8484;
+    height: 10px;
+    float: left;
+    margin: 4px 0 2px 0;
+}
+
+
+.normal_item_wrapper{
+    height: 69px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.hight_item_wrapper{
+    height: 141px;
+    display: flex;
+    flex-direction: column;
+
+}
 </style>
