@@ -1,5 +1,8 @@
 <template>
-<div class="container">
+  <preloader v-show="!show"/>
+
+<div class="container" v-show="show">
+  
   <div class="top_bar"> 
   <h1>Добавление товара</h1> 
     <sort-select v-model="selector"/>
@@ -29,15 +32,17 @@
 import ProductForm from "./components/ProductForm.vue"
 import ProductCard from "./components/ProductCard.vue"
 import SortSelect from "./components/SortSelect.vue"
+import Preloader from "./components/PreLoader.vue"
 import { v4 as uuidv4 } from 'uuid';
 
 export default {
   name: 'App',
-  components: {ProductForm, ProductCard, SortSelect},
+  components: {ProductForm, ProductCard, SortSelect, Preloader},
   data(){
     return{
       cards: [],
-      selector: "def"
+      selector: "def",
+      show: true,
     }
   },
   methods:{
@@ -78,13 +83,16 @@ export default {
       }
     }
   },
-  mounted(){
+  mounted: async function(){
+    
     if(localStorage.cards){
+      console.log(1);
       this.setCards();
     }
     else{
       localStorage.cards = []
-    }
+    }  
+    // await new Promise(() => setTimeout(() => this.show = true, 1000))
   }
 }
 </script>
