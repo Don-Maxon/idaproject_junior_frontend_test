@@ -42,21 +42,26 @@ export default {
     addNewCard(item){
       item.id = uuidv4();
       this.cards.push(item)
-      this.setLocalStorage()
+      this.setLocalStorageCards(this.cards)
     },
 
-    setLocalStorage(){
-      localStorage.cards = this.cards;
+    setLocalStorageCards(cards){
+      localStorage.setItem('cards', JSON.stringify(cards));
+    },
+
+    setCards(){
+      this.cards = JSON.parse(localStorage.getItem('cards'));
     }
+
     
 
   },
   mounted(){
     if(localStorage.cards){
-      // this.cards = localStorage.cards
+      this.setCards();
     }
     else{
-      // localStorage.cards = []
+      localStorage.cards = []
     }
   }
 }

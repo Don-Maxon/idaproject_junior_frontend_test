@@ -102,8 +102,8 @@ export default {
         addProduct(){
             this.v$.$touch();
             if(!this.v$.$error){
-                console.log("валидно");
-                this.$emit("addProduct", this.product_item)
+                const product = JSON.parse(JSON.stringify(this.product_item))
+                this.$emit("addProduct", product)
             }
         }
     }
