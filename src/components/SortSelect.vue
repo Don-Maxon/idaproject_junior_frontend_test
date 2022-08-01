@@ -1,16 +1,23 @@
 <template>
-        <select name="sort_select" id="sort_select">
-                <option selected value="">По умолчанию</option>
-                <option value="">По цене min</option>
-                <option value="">По цене max</option>
-                <option value="">По наименованию</option>
+        <select name="sort_select" id="sort_select" @change="changeSortValue">
+                <option value="def">По умолчанию</option>
+                <option value="min">По цене min</option>
+                <option value="max">По цене max</option>
+                <option value="name">По наименованию</option>
         </select>
 </template>
 
 <script>
 export default {
         name: 'SortSelect',
-
+        props: {
+                modelValue: String,
+        },
+        methods:{
+                changeSortValue(event){
+                        this.$emit('update:modelValue', event.target.value)
+                }
+        }
 }
 </script>
 

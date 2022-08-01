@@ -2,14 +2,14 @@
 <div class="container">
   <div class="top_bar"> 
   <h1>Добавление товара</h1> 
-    <sort-select/>
+    <sort-select v-model="selector"/>
   </div>
   <div class="aside_main_wrapper">
     <aside class="sidebar">
       <product-form @addProduct="addNewCard"/>
     </aside>
     <main>
-      <div class="product_wrapper" v-for="card in cards" :key="card.id">
+      <div class="product_wrapper" v-for="card in sortCards" :key="card.id">
         <product-card  
         :img_url="card.img_url" 
         :description="card.description"
@@ -37,7 +37,7 @@ export default {
   data(){
     return{
       cards: [],
-      name: 'haha'
+      selector: "def"
     }
   },
   methods:{
@@ -58,6 +58,22 @@ export default {
 
     setCards(){
       this.cards = JSON.parse(localStorage.getItem('cards'));
+    }
+  },
+  computed:{
+    sortCards(){
+      
+      let sortCards = this.cards
+      
+      if(this.selector === "min"){
+        return sortCards.sort((a, b) => Number(a.price.replace(/\s/g, '')) > Number(b.price.replace(/\s/g, '')) ? 1 : -1)
+      } else if(this.selector === "max"){
+        return sortCards.sort((a, b) => Number(a.price.replace(/\s/g, '')) < Number(b.price.replace(/\s/g, '')) ? 1 : -1)
+      }else if(this.selector === "name"){
+        return sortCards.sort((x, y) => x.name.localeCompare(y.name));
+      }else{
+        return sortCards
+      } 
     }
   },
   mounted(){
