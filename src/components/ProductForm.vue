@@ -26,14 +26,14 @@
     <div class="normal_item_wrapper">
         <label for="url_img_input" class="required">Ссылка на изображение товара</label>
         <input 
-            type="url" 
+            type="text" 
             id="url_img_input" 
             class="form_item item_height"  
             placeholder="Введите ссылку"
             v-model="img_url"
             :class="{ 'is_invalid': v$.img_url.$error }"
         >
-        <div v-show="v$.img_url.$error" class="is_invalid_massage">Поле является обязательным</div>
+        <div v-show="v$.img_url.$error" class="is_invalid_massage">Поле является обязательным</div>  
     </div>
     <div class="normal_item_wrapper">
         <label for="price_input" class="required">Цена товара</label>
@@ -63,7 +63,7 @@
 
 <script>
 import useVuelidate from '@vuelidate/core'
-import { required, url  } from '@vuelidate/validators'
+import { required } from '@vuelidate/validators'
 
 export default {
     name: 'ProductForm',
@@ -87,15 +87,13 @@ export default {
     validations () {
         return {
             product_name: { required }, 
-            img_url: { required, url },
+            img_url: { required },
             prisce: { required }
-        
         }
     },
     methods: {
         addProduct(){
             this.v$.$touch();
-
             if(!this.v$.$error){
                 console.log("валидно");
             }
@@ -165,42 +163,41 @@ $placeholder-text-color:  #B4B4B4;
 .add_product_btn{
     text-align: center;
     margin-top: 8px;
-    background: #EEEEEE;
     border-radius: 10px;
     border: none;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
-    line-height: 15px;
-    color: $placeholder-text-color;
-    transition: .3s background-color;
-    transition: 1s box-shadow;
-}
-
-.add_product_btn:hover{
-    background-color: #e0dddd;
-    cursor: pointer;
-}
-
-.add_product_btn:active{
-    transition: .3s background-color;
-    transition: .3s box-shadow;
-    box-shadow: inset -2px -2px 15px rgba(0, 0, 0, 0.1);
+    line-height: 15px; 
 }
 
 .active_btn{
-    
+    background: #7BAE73;
+    color: #FFFFFF;
+    transition:  background-color .3s, .3s box-shadow;
+}
+
+.active_btn:hover{
+    background-color: #e0dddd;
+    cursor: pointer;
+    background: #46a138;
+}
+
+.active_btn:active{
+    transition: background-color .3s, box-shadow .3s;
+    box-shadow: inset -2px -2px 15px rgba(0, 0, 0, 0.1);
 }
 
 .disabled_btn{
+    background: #EEEEEE;
+    color: $placeholder-text-color;
     cursor: default;
 }
 
 .disabled_btn:hover{
     cursor: default;
 }
-
 
 
 .required::after {
