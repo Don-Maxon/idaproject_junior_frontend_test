@@ -7,10 +7,10 @@
             id="name_product_input" 
             class="form_item item_height" 
             placeholder="Введите наименование товара"
-            v-model="product_name"
-            :class="{ 'is_invalid': v$.product_name.$error }"
+            v-model="product_item.name"
+            :class="{ 'is_invalid': v$.product_item.name.$error }"
         >
-        <div v-show="v$.product_name.$error" class="is_invalid_massage">Поле является обязательным</div>
+        <div v-show="v$.product_item.name.$error" class="is_invalid_massage">Поле является обязательным</div>
     </div>
     <div class="hight_item_wrapper">
         <label for="product_description_textarea" >Описание товара</label>
@@ -19,7 +19,7 @@
             id="product_description_textarea" 
             class="form_item" 
             placeholder="Введите описание товара"
-            v-model="description"
+            v-model="product_item.description"
 
         ></textarea>
     </div>
@@ -30,10 +30,10 @@
             id="url_img_input" 
             class="form_item item_height"  
             placeholder="Введите ссылку"
-            v-model="img_url"
-            :class="{ 'is_invalid': v$.img_url.$error }"
+            v-model="product_item.img_url"
+            :class="{ 'is_invalid': v$.product_item.img_url.$error }"
         >
-        <div v-show="v$.img_url.$error" class="is_invalid_massage">Поле является обязательным</div>  
+        <div v-show="v$.product_item.img_url.$error" class="is_invalid_massage">Поле является обязательным</div>  
     </div>
     <div class="normal_item_wrapper">
         <label for="price_input" class="required">Цена товара</label>
@@ -43,11 +43,11 @@
             class="form_item item_height" 
             placeholder="Введите цену" 
             :model-modifiers="{ number: true }" 
-            v-model.lazy="prisce" 
-            v-money3="prisce_config"
-            :class="{ 'is_invalid': v$.prisce.$error }"
+            v-model.lazy="product_item.price" 
+            v-money3="price_config"
+            :class="{ 'is_invalid': v$.product_item.price.$error }"
         >
-        <div v-show="v$.prisce.$error" class="is_invalid_massage">Поле является обязательным</div>
+        <div v-show="v$.product_item.price.$error" class="is_invalid_massage">Поле является обязательным</div>
     </div>
     
     <button  
@@ -72,23 +72,30 @@ export default {
     },
     data(){ 
         return {
-            prisce_config: {
+            price_config: {
                 masked: false,
                 thousands: ' ',
                 precision: 0, 
                 allowBlank: true,   
             },
-            product_name: "",
-            description: "",
-            img_url: "",
-            prisce: null,
+            product_item:{
+                price: null,
+                name: "",
+                img_url: "",
+                description: "",
+            },
+            
+            
         }
     },
     validations () {
         return {
-            product_name: { required }, 
-            img_url: { required },
-            prisce: { required }
+            product_item:{
+                price: { required },
+                name: { required }, 
+                img_url: { required },
+            },
+            
         }
     },
     methods: {
@@ -96,6 +103,7 @@ export default {
             this.v$.$touch();
             if(!this.v$.$error){
                 console.log("валидно");
+                this.$emit("addProduct", this.product_item)
             }
         }
     }

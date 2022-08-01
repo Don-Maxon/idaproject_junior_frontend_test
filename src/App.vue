@@ -6,15 +6,15 @@
   </div>
   <div class="aside_main_wrapper">
     <aside class="sidebar">
-      <product-form />
+      <product-form @addProduct="addNewCard"/>
     </aside>
     <main>
-      <div class="product_wrapper" v-for="i in 5" :key="i">
+      <div class="product_wrapper" v-for="card in cards" :key="card.id">
         <product-card  
-        :img_url="'http://1001goroskop.ru/img/gadanie/derevo_zh/_derevo.jpg'" 
-        :description="'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк'"
-        :titel="'титул'"
-        :price="'150'"
+        :img_url="card.img_url" 
+        :description="card.description"
+        :titel="card.name"
+        :price="card.price"
         />
       </div>
     </main>
@@ -27,6 +27,7 @@
 import ProductForm from "./components/ProductForm.vue"
 import ProductCard from "./components/ProductCard.vue"
 import SortSelect from "./components/SortSelect.vue"
+import { v4 as uuidv4 } from 'uuid';
 
 export default {
   name: 'App',
@@ -38,16 +39,24 @@ export default {
     }
   },
   methods:{
+    addNewCard(item){
+      item.id = uuidv4();
+      this.cards.push(item)
+      this.setLocalStorage()
+    },
+
+    setLocalStorage(){
+      localStorage.cards = this.cards;
+    }
     
 
   },
   mounted(){
-    console.log(localStorage.cards)
     if(localStorage.cards){
-      this.cards = localStorage.cards
+      // this.cards = localStorage.cards
     }
     else{
-      localStorage.cards = []
+      // localStorage.cards = []
     }
   }
 }
