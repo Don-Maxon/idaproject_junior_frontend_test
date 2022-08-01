@@ -102,9 +102,18 @@ export default {
         addProduct(){
             this.v$.$touch();
             if(!this.v$.$error){
-                const product = JSON.parse(JSON.stringify(this.product_item))
-                this.$emit("addProduct", product)
+                const product = JSON.parse(JSON.stringify(this.product_item));
+                this.$emit("addProduct", product);
+                this.v$.$reset();
+                this.clearForm();
             }
+        },
+
+        clearForm(){
+            this.product_item.price = null;
+            this.product_item.name = "";
+            this.product_item.img_url = "";
+            this.product_item.description = "";
         }
     }
 }
