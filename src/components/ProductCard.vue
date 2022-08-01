@@ -86,13 +86,18 @@ export default {
         height: 200px;
         display: inline-block;
         overflow: hidden;
+        display: flex;
+        justify-content: center;
+        
 }
 
 .img_wrapper img{
+        height: 100%;
         width: auto;
         max-width: 100%;
         border-radius: 4px 4px 0px 0px;
         object-fit: cover;
+        
 }
 
 .text_wrapper{
@@ -130,10 +135,7 @@ export default {
         justify-content: center;
         visibility: hidden;
         opacity: 0;
-        transition: background .5s, opacity .5s;
-        // transition: 1s opacity;
-
-   
+        transition: background .5s, opacity .5s;  
 }
 
 .delete_icon:hover{

@@ -8,7 +8,7 @@
     <aside class="sidebar">
       <product-form @addProduct="addNewCard"/>
     </aside>
-    <main>
+    <transition-group name="card_list" tag="main">
       <div class="product_wrapper" v-for="card in sortCards" :key="card.id">
         <product-card  
         :img_url="card.img_url" 
@@ -19,7 +19,7 @@
         @dleteCardItem="dleteCard"
         />
       </div>
-    </main>
+    </transition-group>
   </div>
 </div>
 
@@ -62,18 +62,20 @@ export default {
   },
   computed:{
     sortCards(){
-      
-      let sortCards = this.cards
+
+      let sortedCards = JSON.parse(JSON.stringify(this.cards))
       
       if(this.selector === "min"){
-        return sortCards.sort((a, b) => Number(a.price.replace(/\s/g, '')) > Number(b.price.replace(/\s/g, '')) ? 1 : -1)
+        return sortedCards.sort((a, b) => Number(a.price.replace(/\s/g, '')) > Number(b.price.replace(/\s/g, '')) ? 1 : -1)
       } else if(this.selector === "max"){
-        return sortCards.sort((a, b) => Number(a.price.replace(/\s/g, '')) < Number(b.price.replace(/\s/g, '')) ? 1 : -1)
+        return sortedCards.sort((a, b) => Number(a.price.replace(/\s/g, '')) < Number(b.price.replace(/\s/g, '')) ? 1 : -1)
       }else if(this.selector === "name"){
-        return sortCards.sort((x, y) => x.name.localeCompare(y.name));
-      }else{
-        return sortCards
-      } 
+        return sortedCards.sort((x, y) => x.name.localeCompare(y.name));
+      }else if(this.selector === "def"){
+        return sortedCards
+      } else{
+        return sortedCards
+      }
     }
   },
   mounted(){
@@ -162,6 +164,16 @@ main{
   margin-right: auto;
 }
 
+.card_list-move,
+.card_list-enter-active,
+.card_list-leave-active {
+  transition: all 0.5s ease;
+}
+.card_list-enter-from,
+.card_list-leave-to {
+  opacity: 0;
+  transform: scale(0.5);
+}
 
 
 
