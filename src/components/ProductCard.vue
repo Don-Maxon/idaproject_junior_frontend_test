@@ -1,6 +1,6 @@
 <template>
         <div class="card_wrapper">
-                <div class="delete_icon" @click="deleteItem">
+                <div class="delete_icon" @click="dleteCardItem">
                         <img src="../assets/pages/trash_item.png" alt="">
                 </div>
                 <div class="img_wrapper"> 
@@ -39,11 +39,15 @@ export default {
                 price:{
                         type: String,
                         default: "1"
+                },
+                id:{
+                        type: String,
+                        required: true
                 }
         },
         methods:{
-                deleteItem(){
-                        console.log('delete');
+                dleteCardItem(){
+                        this.$emit("dleteCardItem", this.$props.id)
                 }
         }
 }

@@ -15,6 +15,8 @@
         :description="card.description"
         :titel="card.name"
         :price="card.price"
+        :id="card.id"
+        @dleteCardItem="dleteCard"
         />
       </div>
     </main>
@@ -45,6 +47,11 @@ export default {
       this.setLocalStorageCards(this.cards)
     },
 
+    dleteCard(id){
+      this.cards = this.cards.filter(item => item.id != id);
+      this.setLocalStorageCards(this.cards)
+    },
+
     setLocalStorageCards(cards){
       localStorage.setItem('cards', JSON.stringify(cards));
     },
@@ -52,9 +59,6 @@ export default {
     setCards(){
       this.cards = JSON.parse(localStorage.getItem('cards'));
     }
-
-    
-
   },
   mounted(){
     if(localStorage.cards){
