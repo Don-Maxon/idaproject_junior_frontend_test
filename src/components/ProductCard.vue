@@ -4,15 +4,14 @@
                         <img src="../assets/pages/trash_item.png" alt="">
                 </div>
                 <div class="img_wrapper"> 
-                        <img src="../assets/pages/default_card_picture.png" alt="">
+                        <img :src="img_url" alt="Изображение товара" >
                 </div>
                 <div class="text_wrapper"> 
-                        <h3>Наименование товара</h3>
+                        <h3>{{titel}}</h3>
                         <div class="description">
-                                Довольно-таки интересное описание товара в несколько строк. 
-                                Довольно-таки интересное описание товара в несколько строк
+                                {{description}}
                         </div>
-                        <div class="price">10 000 руб.</div>
+                        <div class="price">{{price}} <span>руб.</span></div>
                 </div>
         </div>
 </template>
@@ -23,6 +22,24 @@ export default {
         data() {
                 return { }      
         
+        },
+        props: {
+                img_url: {
+                        type: String,
+                        default: require('../assets/pages/no_img.png')
+                },
+                titel: {
+                        type: String,
+                        default: "..."
+                },
+                description:{
+                        type: String,
+                        default: "..."
+                },
+                price:{
+                        type: String,
+                        default: "1"
+                }
         },
         methods:{
                 deleteItem(){
@@ -65,7 +82,6 @@ export default {
         height: 200px;
         display: inline-block;
         overflow: hidden;
-        // background-color: red;
 }
 
 .img_wrapper img{
@@ -81,8 +97,10 @@ export default {
         flex-grow: 1;
 }
 
-.description{
-        overflow: auto;
+.description{ 
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 3;
         height: 80px;
         margin: 16px 0 32px 0;
 }

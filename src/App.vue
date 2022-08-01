@@ -9,9 +9,13 @@
       <product-form/>
     </aside>
     <main>
-
       <div class="product_wrapper" v-for="i in 5" :key="i">
-        <product-card  />
+        <product-card  
+        :img_url="'http://1001goroskop.ru/img/gadanie/derevo_zh/_derevo.jpg'" 
+        :description="'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк'"
+        :titel="'титул'"
+        :price="'150'"
+        />
       </div>
     </main>
   </div>
@@ -86,14 +90,11 @@ aside{
 
 main{
   max-width: 1044px;
-  // padding-left: 16px;
-  // background: green;
+
   flex: 1;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  // justify-content: flex-end;
-
   padding-left: auto;
   
 }
