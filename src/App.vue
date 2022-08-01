@@ -6,7 +6,7 @@
   </div>
   <div class="aside_main_wrapper">
     <aside class="sidebar">
-      <product-form/>
+      <product-form />
     </aside>
     <main>
       <div class="product_wrapper" v-for="i in 5" :key="i">
@@ -30,7 +30,26 @@ import SortSelect from "./components/SortSelect.vue"
 
 export default {
   name: 'App',
-  components: {ProductForm, ProductCard, SortSelect}
+  components: {ProductForm, ProductCard, SortSelect},
+  data(){
+    return{
+      cards: [],
+      name: 'haha'
+    }
+  },
+  methods:{
+    
+
+  },
+  mounted(){
+    console.log(localStorage.cards)
+    if(localStorage.cards){
+      this.cards = localStorage.cards
+    }
+    else{
+      localStorage.cards = []
+    }
+  }
 }
 </script>
 
