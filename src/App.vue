@@ -4,7 +4,7 @@
 <div class="container" v-show="show">
   
   <div class="top_bar"> 
-  <h1>Добавление товара</h1> 
+  <h2>Добавление товара</h2> 
     <sort-select v-model="selector"/>
   </div>
   <div class="aside_main_wrapper">
@@ -12,16 +12,16 @@
       <product-form @addProduct="addNewCard"/>
     </aside>
     <transition-group name="card_list" tag="main">
-      <div class="product_wrapper" v-for="card in sortCards" :key="card.id">
-        <product-card  
+      <product-card  
+        v-for="card in sortCards" 
+        :key="card.id"
         :img_url="card.img_url" 
         :description="card.description"
         :titel="card.name"
         :price="card.price"
         :id="card.id"
         @dleteCardItem="dleteCard"
-        />
-      </div>
+      />
     </transition-group>
   </div>
 </div>
@@ -118,11 +118,10 @@ body{
 	color: $text-color;
 }
 
-h1{
+h2{
   height: 35px;
   font-weight: 600;
   margin: 0;
-  
 }
 
 #app {
@@ -181,6 +180,35 @@ main{
 .card_list-leave-to {
   opacity: 0;
   transform: scale(0.5);
+}
+
+@media (max-width: 768px){
+
+  .container{
+    padding: 32px 16px;
+  }
+
+  .aside_main_wrapper{
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  aside{
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  main{
+    justify-content: space-between;
+  }
+  .product_wrapper{
+    margin-left: 0px;
+    width: 100%;
+  }
+
+  .top_bar h2{
+    height: auto;
+    font-size: 1.5em;
+  }
 }
 
 

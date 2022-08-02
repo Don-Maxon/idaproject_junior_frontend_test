@@ -8,9 +8,12 @@
                 </div>
                 <div class="text_wrapper"> 
                         <h3>{{titel}}</h3>
-                        <div class="description">
-                                {{description}}
+                        <div class="description_wrapper">
+                                <div class="description">
+                                        {{description}}
+                                </div>
                         </div>
+                        
                         <div class="price">{{price}} <span>руб.</span></div>
                 </div>
         </div>
@@ -64,6 +67,8 @@ export default {
         display: inline-flex;
         flex-direction: column;
         visibility: visible;
+        margin-left: 16px;
+        margin-bottom: 16px;
 }
 
 .card_wrapper:hover{
@@ -80,15 +85,18 @@ export default {
         font-weight: 600;
         font-size: 20px;
         line-height: 25px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
 }
 
 .img_wrapper{
-        height: 200px;
+        max-height: 200px;
+        max-height: 200px;
         display: inline-block;
         overflow: hidden;
         display: flex;
         justify-content: center;
-        
 }
 
 .img_wrapper img{
@@ -97,22 +105,32 @@ export default {
         max-width: 100%;
         border-radius: 4px 4px 0px 0px;
         object-fit: cover;
-        
+        min-height: 200px;
 }
 
 .text_wrapper{
         padding:  16px 16px 24px 16px;
         height: auto;
         flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+}
+
+.description_wrapper{
+        flex-grow: 1;
 }
 
 .description{ 
         overflow: hidden;
         text-overflow: ellipsis;
-        -webkit-line-clamp: 3;
-        height: 80px;
+        height: auto;
         margin: 16px 0 32px 0;
+	display: -webkit-box;
+	-webkit-line-clamp: 4;
+	-webkit-box-orient: vertical;
+        
 }
+
 
 .price{
         height: 30px;
@@ -143,5 +161,22 @@ export default {
         background: #ed2121;
         visibility: hidden;
         opacity: 1;       
+}
+
+@media (max-width: 768px){
+        .card_wrapper{
+                margin-left: 0;
+                height: auto;
+        }
+        
+        .description{
+                margin: 8px 0;
+        }
+}
+
+@media (max-width: 700px){
+        .card_wrapper{
+                width: 100%;
+        }
 }
 </style>
