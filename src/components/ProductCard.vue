@@ -56,58 +56,68 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
+$bg_color: #FFFEFB;
+$card_box_shadow: 0px 20px 30px rgba(0, 0, 0, 0.04), 0px 6px 10px rgba(0, 0, 0, 0.02);
+$danger_color: #FF8484;
+$act_danger_color: #ed2121;
+$def_shadow_color: rgba(0,0,0,0.1);
+
+
+
 .card_wrapper{    
         position: relative; 
         max-width: 332px;
         width: 33.0%;
         height: 423px;
-        background: #FFFEFB;
-        box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.04), 0px 6px 10px rgba(0, 0, 0, 0.02);
+        background: $bg_color;
+        box-shadow: $card_box_shadow;
         border-radius: 4px;
         display: inline-flex;
         flex-direction: column;
         visibility: visible;
         margin-left: auto;
+
         margin-bottom: 16px;
+
+        h3{
+                margin: 0;
+                font-weight: 600;
+                font-size: 20px;
+                line-height: 25px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+        }
 }
 
 .card_wrapper:hover{
         cursor: pointer;
-}
 
-.card_wrapper:hover .delete_icon{
-        visibility: visible;
-        opacity: 1;
-}
-
-.card_wrapper h3{
-        margin: 0;
-        font-weight: 600;
-        font-size: 20px;
-        line-height: 25px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        .delete_icon{
+                visibility: visible;
+                opacity: 1;
+        }
 }
 
 .img_wrapper{
         max-height: 200px;
         max-height: 200px;
-        display: inline-block;
-        overflow: hidden;
         display: flex;
+        
+        overflow: hidden;
         justify-content: center;
+
+        img{
+                height: 100%;
+                width: auto;
+                max-width: 100%;
+                border-radius: 4px 4px 0px 0px;
+                object-fit: cover;
+                min-height: 200px;
+        }
 }
 
-.img_wrapper img{
-        height: 100%;
-        width: auto;
-        max-width: 100%;
-        border-radius: 4px 4px 0px 0px;
-        object-fit: cover;
-        min-height: 200px;
-}
 
 .text_wrapper{
         padding:  16px 16px 24px 16px;
@@ -144,8 +154,8 @@ export default {
         position: absolute;
         width: 32px;
         height: 32px;
-        background: #FF8484;
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        background: $danger_color;
+        box-shadow: 0px 2px 4px $def_shadow_color;
         border-radius: 10px;
         display: flex;
         align-items: center;
@@ -157,7 +167,7 @@ export default {
 
 .delete_icon:hover{
         cursor: pointer;
-        background: #ed2121;
+        background: $act_danger_color;
         visibility: hidden;
         opacity: 1;       
 }
