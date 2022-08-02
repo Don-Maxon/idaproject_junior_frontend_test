@@ -1,64 +1,62 @@
 <template>
-  <form action="" id="add_product_form" onsubmit="return false">
-    <div class="normal_item_wrapper">
-        <label for="name_product_input" class="required">Наименование товара</label>
-        <input 
-            type="text" 
-            id="name_product_input" 
-            class="form_item item_height" 
-            placeholder="Введите наименование товара"
-            v-model="product_item.name"
-            :class="{ 'is_invalid': v$.product_item.name.$error }"
-        >
-        <div v-show="v$.product_item.name.$error" class="is_invalid_massage">Поле является обязательным</div>
-    </div>
-    <div class="hight_item_wrapper">
-        <label for="product_description_textarea" >Описание товара</label>
-        <textarea 
-            name="product_description_textarea" 
-            id="product_description_textarea" 
-            class="form_item" 
-            placeholder="Введите описание товара"
-            v-model="product_item.description"
+    <form action="" id="add_product_form" onsubmit="return false">
+        <div class="normal_item_wrapper">
+            <label for="name_product_input" class="required">Наименование товара</label>
+            <input 
+                type="text" 
+                name="name_product_input"
+                class="form_item item_height" 
+                placeholder="Введите наименование товара"
+                v-model="product_item.name"
+                :class="{ 'is_invalid': v$.product_item.name.$error }"
+            >
+            <div v-show="v$.product_item.name.$error" class="is_invalid_massage">Поле является обязательным</div>
+        </div>
+        <div class="hight_item_wrapper">
+            <label for="product_description_textarea" >Описание товара</label>
+            <textarea 
+                name="product_description_textarea" 
+                class="form_item product_description_textarea" 
+                placeholder="Введите описание товара"
+                v-model="product_item.description"
 
-        ></textarea>
-    </div>
-    <div class="normal_item_wrapper">
-        <label for="url_img_input" class="required">Ссылка на изображение товара</label>
-        <input 
-            type="text" 
-            id="url_img_input" 
-            class="form_item item_height"  
-            placeholder="Введите ссылку"
-            v-model="product_item.img_url"
-            :class="{ 'is_invalid': v$.product_item.img_url.$error }"
+            ></textarea>
+        </div>
+        <div class="normal_item_wrapper">
+            <label for="url_img_input" class="required">Ссылка на изображение товара</label>
+            <input 
+                type="text" 
+                name="url_img_input" 
+                class="form_item item_height"  
+                placeholder="Введите ссылку"
+                v-model="product_item.img_url"
+                :class="{ 'is_invalid': v$.product_item.img_url.$error }"
+            >
+            <div v-show="v$.product_item.img_url.$error" class="is_invalid_massage">Поле является обязательным</div>  
+        </div>
+        <div class="normal_item_wrapper">
+            <label for="price_input" class="required">Цена товара</label>
+            <input 
+                type="text" 
+                name="price_input" 
+                class="form_item item_height" 
+                placeholder="Введите цену" 
+                :model-modifiers="{ number: true }" 
+                v-model.lazy="product_item.price" 
+                v-money3="price_config"
+                :class="{ 'is_invalid': v$.product_item.price.$error }"
+            >
+            <div v-show="v$.product_item.price.$error" class="is_invalid_massage">Поле является обязательным</div>
+        </div>
+        <button  
+            class="item_height add_product_btn" 
+            :disabled="v$.$error"
+            @click="addProduct"
+            :class="{ 'disabled_btn': v$.$error, 'active_btn': !v$.$error}"
         >
-        <div v-show="v$.product_item.img_url.$error" class="is_invalid_massage">Поле является обязательным</div>  
-    </div>
-    <div class="normal_item_wrapper">
-        <label for="price_input" class="required">Цена товара</label>
-        <input 
-            type="text" 
-            id="price_input" 
-            class="form_item item_height" 
-            placeholder="Введите цену" 
-            :model-modifiers="{ number: true }" 
-            v-model.lazy="product_item.price" 
-            v-money3="price_config"
-            :class="{ 'is_invalid': v$.product_item.price.$error }"
-        >
-        <div v-show="v$.product_item.price.$error" class="is_invalid_massage">Поле является обязательным</div>
-    </div>
-    
-    <button  
-        class="item_height add_product_btn" 
-        :disabled="v$.$error"
-        @click="addProduct"
-        :class="{ 'disabled_btn': v$.$error, 'active_btn': !v$.$error}"
-    >
-        Добавить товар
-    </button>
-</form>
+            Добавить товар
+        </button>
+    </form>
 </template>
 
 <script>
@@ -83,9 +81,7 @@ export default {
                 name: "",
                 img_url: "",
                 description: "",
-            },
-            
-            
+            },            
         }
     },
     validations () {
@@ -94,10 +90,10 @@ export default {
                 price: { required },
                 name: { required }, 
                 img_url: { required },
-            },
-            
+            }, 
         }
     },
+
     methods: {
         addProduct(){
             this.v$.$touch();
@@ -119,32 +115,43 @@ export default {
 }
 </script>
 
-<style lang="scss">
-$label-text-color: #49485E;
+<style scoped lang="scss">
+$label_text_color: #49485E;
+$bg_color: #FFFEFB;
 $placeholder-text-color:  #B4B4B4;
+$act_btn_bg: #7BAE73;
+$act_btn_bg_hover: #46a138;
+$act_btn_color: #FFFFFF;
+$danger_color: #FF8484;
+$def_shadow_color: rgba(0,0,0,0.1);
+$act_shadow_color: rgba(0,0,0,0.5);
+$form_box_shadow: 0px 20px 30px rgba(0, 0, 0, 0.04), 0px 6px 10px rgba(0, 0, 0, 0.02);
+
+
+
 
 #add_product_form{
   padding: 24px;
-  box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.04), 0px 6px 10px rgba(0, 0, 0, 0.02);
+  box-shadow: $form_box_shadow;
   border-radius: 4px;
-  background: #FFFEFB;
+  background: $bg_color;
   display: flex;
   flex-direction: column;
-}
 
-#add_product_form label{
-  font-size: 10px;
-  color: $label-text-color;
-  margin-bottom: 4px;
-  height: 13px;
-}
+    label{
+        font-size: 10px;
+        color: $label_text_color;
+        margin-bottom: 4px;
+        height: 13px;
+    }
 
-#add_product_form .item_height{
-    height: 36px;
+    .item_height{
+        height: 36px;
+    }
 }
 
 .form_item{
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 2px 5px $def_shadow_color;
     border-radius: 4px;
     border: 0px;
     outline:none;
@@ -156,12 +163,12 @@ $placeholder-text-color:  #B4B4B4;
 }
 
 .form_item:hover{
-    box-shadow:0 0 4px rgba(0,0,0,0.5);
+    box-shadow:0 0 4px $act_shadow_color;
 }
 
 .form_item:focus{
     border: 1px solid #95959e;
-    box-shadow:0 0 4px rgba(0,0,0,0.5);
+    box-shadow:0 0 4px $act_shadow_color;
 }
 
 .form_item::placeholder{
@@ -171,8 +178,7 @@ $placeholder-text-color:  #B4B4B4;
   color: $placeholder-text-color;
 }
 
-
-#product_description_textarea{
+.product_description_textarea{
     resize: none;
     height: 108px;
 }
@@ -190,20 +196,19 @@ $placeholder-text-color:  #B4B4B4;
 }
 
 .active_btn{
-    background: #7BAE73;
-    color: #FFFFFF;
+    background: $act_btn_bg;
+    color: $act_btn_color;
     transition:  background-color .3s, .3s box-shadow;
 }
 
 .active_btn:hover{
-    background-color: #e0dddd;
     cursor: pointer;
-    background: #46a138;
+    background: $act_btn_bg_hover
 }
 
 .active_btn:active{
     transition: background-color .3s, box-shadow .3s;
-    box-shadow: inset -2px -2px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: inset -2px -2px 15px $act_shadow_color;
 }
 
 .disabled_btn{
@@ -218,41 +223,38 @@ $placeholder-text-color:  #B4B4B4;
 
 
 .required::after {
-width: 4px; 
-height: 4px;
-background: #FF8484;
-border-radius: 50%;
-content: "";
-display: inline-block;
-margin-bottom: 5px;
+    width: 4px; 
+    height: 4px;
+    background: $danger_color;
+    border-radius: 50%;
+    content: "";
+    display: inline-block;
+    margin-bottom: 5px;
 }
 
 .is_invalid{
-    border: 1px solid #FF8484;
+    border: 1px solid $danger_color;
 }
 
 .is_invalid_massage{
     font-size: 8px;
     line-height: 10px;
     letter-spacing: -0.02em;
-    color: #FF8484;
+    color: $danger_color;
     height: 10px;
     float: left;
     margin: 4px 0 2px 0;
 }
 
-
 .normal_item_wrapper{
     height: 69px;
     display: flex;
     flex-direction: column;
-
 }
 
 .hight_item_wrapper{
     height: 141px;
     display: flex;
     flex-direction: column;
-
 }
 </style>
