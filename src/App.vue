@@ -29,7 +29,6 @@
     </transition-group>
   </div>
 </div>
-
 </template>
 
 <script>
@@ -46,7 +45,7 @@ export default {
     return{
       cards: [],
       selector: "def",
-      show: true,
+      show: false,
     }
   },
   methods:{
@@ -94,12 +93,12 @@ export default {
   mounted: async function(){
     
     if(localStorage.cards){
-      console.log(1);
       this.setCards();
     }
     else{
       localStorage.cards = []
     }  
+    await new Promise(() => setTimeout(() => this.show = true, 1500));
   }
 }
 </script>
@@ -121,8 +120,6 @@ body{
 	font-size: 16px;
 	color: $text-color;
 }
-
-
 
 #app {
   min-height: 100vh;
@@ -153,7 +150,6 @@ body{
     font-size: 28px;
     line-height: 35px;
   }
-
 }
 
 .aside_main_wrapper{
@@ -166,17 +162,17 @@ aside{
   min-height: 100%;
 }
 
-.product_form_wrapper{
-  position: sticky;
-  top: 0;
-}
-
 main{
   display: flex;
   flex: 1;
   justify-content: flex-start; 
   flex-wrap: wrap;
   max-width: 1044px;
+}
+
+.product_form_wrapper{
+  position: sticky;
+  top: 0;
 }
 
 .product_wrapper{
@@ -231,13 +227,11 @@ main{
   }
 
   .top_bar{
-    display: flex;
-    justify-content: space-between;
     padding-top: 10px;
     padding-bottom: 10px;
     position: sticky;
-    z-index: 100;
-    background: rgba(255, 254, 251);;
+    z-index: 10;
+    background: $bg_color;
   }
 
   .top_bar{

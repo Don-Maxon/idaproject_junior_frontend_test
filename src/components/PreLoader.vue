@@ -11,6 +11,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "@/styles/variables.scss";
 
 .load_container {
   width: 100%;
@@ -18,13 +19,13 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgb(75, 73, 73);
+  background: $text_color;
 }
 
 .loader {
   width: 100px;
   height: 100px;
-  border: 5px solid #FFF;
+  border: 5px solid $bg_color;
   border-radius: 50%;
   display: inline-block;
   position: relative;
@@ -42,7 +43,7 @@ export default {
   height: 80px;
   border-radius: 50%;
   border: 5px solid;
-  border-color: #FF3D00 transparent;
+  border-color: $act_btn_bg_hover transparent;
 }
 
 @keyframes rotation {
