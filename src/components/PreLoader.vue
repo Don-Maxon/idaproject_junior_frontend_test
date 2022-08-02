@@ -12,7 +12,6 @@ export default {
 
 <style scoped lang="scss">
 
-
 .load_container {
   width: 100%;
   height: 100vh;

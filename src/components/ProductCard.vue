@@ -68,7 +68,7 @@ $def_shadow_color: rgba(0,0,0,0.1);
 .card_wrapper{    
         position: relative; 
         max-width: 332px;
-        width: 33.0%;
+        width: 100%;
         height: 423px;
         background: $bg_color;
         box-shadow: $card_box_shadow;
@@ -172,27 +172,26 @@ $def_shadow_color: rgba(0,0,0,0.1);
         opacity: 1;       
 }
 
-@media (max-width: 1440px){
-        .card_wrapper{
-                width: 32.0%;
-        }
-}
-
 @media (max-width: 1280px){
         .card_wrapper{
-                width: 48%;
+                max-width: 100%;
         }
 }
 
 @media (max-width: 768px){
         .card_wrapper{
                 min-width: auto;
-                margin-left: 0;
                 height: auto;
         }
         
         .description{
                 margin: 8px 0;
+        }
+        .img_wrapper{
+                img{
+                        max-height: 200px;
+                        max-width: auto;
+                }
         }
 }
 

@@ -14,16 +14,20 @@
       </div>
     </aside>
     <transition-group name="card_list" tag="main">
-      <product-card  
+      <div class="product_wrapper" 
         v-for="card in sortCards" 
         :key="card.id"
-        :img_url="card.img_url" 
-        :description="card.description"
-        :titel="card.name"
-        :price="card.price"
-        :id="card.id"
-        @dleteCardItem="dleteCard"
-      />
+        > 
+          <product-card  
+            
+            :img_url="card.img_url" 
+            :description="card.description"
+            :titel="card.name"
+            :price="card.price"
+            :id="card.id"
+            @dleteCardItem="dleteCard"
+          />
+      </div>
     </transition-group>
   </div>
 </div>
@@ -167,14 +171,12 @@ main{
 }
 
 .product_wrapper{
-  margin-left: 16px;
-  margin-bottom: 16px;
+  width: 33.33%;
+  padding-left: 16px;
 
 }
 
-.product_wrapper:last-of-type{
-  margin-right: auto;
-}
+
 
 .card_list-move,
 .card_list-enter-active,
@@ -187,6 +189,13 @@ main{
   opacity: 0;
   transform: scale(0.5);
 }
+
+@media (max-width: 1280px){
+        .product_wrapper{
+          width: 50%;
+        }
+}
+
 
 @media (max-width: 768px){
 
