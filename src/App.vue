@@ -1,12 +1,10 @@
 <template>
   <preloader v-show="!show"/>
-
-<div class="container" ref="container" v-show="show">
-  
-  <div class="top_bar"> 
+<header class="top_bar" v-show="show"> 
   <h2 @click="scrollToForm">Добавление товара</h2> 
     <sort-select v-model="selector"/>
-  </div>
+</header>
+<div class="container"  v-show="show" ref="container">
   <div class="aside_main_wrapper">
     <aside class="sidebar" >
       <div class="product_form_wrapper">
@@ -78,7 +76,6 @@ export default {
   },
   computed:{
     sortCards(){
-
       let sortedCards = JSON.parse(JSON.stringify(this.cards))
       
       if(this.selector === "min"){
@@ -111,9 +108,7 @@ export default {
 @import "normalize.css";
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Source+Sans+Pro&display=swap');
-
-$text_color: #3F3F3F;
-$body_bg_color: rgba(255, 254, 251, 0.8);
+@import "@/styles/variables.scss";
 
 * {
   box-sizing: border-box;
@@ -127,12 +122,7 @@ body{
 	color: $text-color;
 }
 
-h2{
-  height: 35px;
-  margin: 0;
-  font-weight: 600;
-  pointer-events: none;
-}
+
 
 #app {
   min-height: 100vh;
@@ -140,7 +130,7 @@ h2{
 
 .container{
   max-width: 1440px;
-  padding: 32px 32px;
+  padding: 0 32px 32px;
   margin: 0 auto;
   align-items: center;
 }
@@ -148,8 +138,22 @@ h2{
 .top_bar{
   display: flex;
   justify-content: space-between;
-  margin: 0;
-  top: 0
+  max-width: 1440px;
+  padding: 16px 32px;
+  margin: 0 auto;
+  top: 0;
+
+  h2{
+    display: flex;
+    box-align:end;
+    height: 35px;
+    margin: 0;
+    font-weight: 600;
+    pointer-events: none;
+    font-size: 28px;
+    line-height: 35px;
+  }
+
 }
 
 .aside_main_wrapper{
@@ -163,7 +167,6 @@ aside{
 }
 
 .product_form_wrapper{
-  padding-top: 24px;
   position: sticky;
   top: 0;
 }
@@ -173,7 +176,6 @@ main{
   flex: 1;
   justify-content: flex-start; 
   flex-wrap: wrap;
-  padding-top: 24px;
   max-width: 1044px;
 }
 
@@ -196,14 +198,12 @@ main{
 }
 
 @media (max-width: 1280px){
-        .product_wrapper{
-          width: 50%;
-        }
+  .product_wrapper{
+    width: 50%;
+  }
 }
 
-
 @media (max-width: 768px){
-
   .product_form_wrapper{
     padding-top: 0;
   }
@@ -234,23 +234,21 @@ main{
     display: flex;
     justify-content: space-between;
     padding-top: 10px;
+    padding-bottom: 10px;
     position: sticky;
     z-index: 100;
     background: rgba(255, 254, 251);;
   }
 
-  
-  
-  .top_bar h2{
-    min-height: auto;
-    font-size: 1.1em;
-    cursor: pointer;
-    pointer-events: all;
-    
+  .top_bar{
+    h2{
+      min-height: auto;
+      font-size: 1.1em;
+      cursor: pointer;
+      pointer-events: all;
+      height: auto;
+    } 
   }
-
-  
-
 }
 
 </style>

@@ -57,11 +57,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$bg_color: #FFFEFB;
-$card_box_shadow: 0px 20px 30px rgba(0, 0, 0, 0.04), 0px 6px 10px rgba(0, 0, 0, 0.02);
-$danger_color: #FF8484;
-$act_danger_color: #ed2121;
-$def_shadow_color: rgba(0,0,0,0.1);
+@import "@/styles/variables.scss";
 
 
 
@@ -71,7 +67,7 @@ $def_shadow_color: rgba(0,0,0,0.1);
         width: 100%;
         height: 423px;
         background: $bg_color;
-        box-shadow: $card_box_shadow;
+        box-shadow: $wrap_box_shadow;
         border-radius: 4px;
         display: inline-flex;
         flex-direction: column;

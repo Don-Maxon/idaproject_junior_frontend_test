@@ -22,15 +22,14 @@ export default {
 </script>
 
 <style lang="scss">
-$sort-select-bg: #FFFEFB;
-$sort-select-color:  #B4B4B4;
+@import "@/styles/variables.scss";
 
 #sort_select{
         border: none;
         width: auto;
         height: 36px;
         padding: 10px 0px 11px 16px;
-        background: $sort-select-bg;
+        background: $bg_color;
         box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
         border-radius: 4px;
         font-family: 'Source Sans Pro';
@@ -38,7 +37,7 @@ $sort-select-color:  #B4B4B4;
         font-weight: 400;
         font-size: 12px;
         line-height: 15px;
-        color: $sort-select-color;
+        color: $sort_select_color;
         cursor: pointer;
 }
 

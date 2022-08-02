@@ -116,23 +116,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$label_text_color: #49485E;
-$bg_color: #FFFEFB;
-$placeholder-text-color:  #B4B4B4;
-$act_btn_bg: #7BAE73;
-$act_btn_bg_hover: #46a138;
-$act_btn_color: #FFFFFF;
-$danger_color: #FF8484;
-$def_shadow_color: rgba(0,0,0,0.1);
-$act_shadow_color: rgba(0,0,0,0.5);
-$form_box_shadow: 0px 20px 30px rgba(0, 0, 0, 0.04), 0px 6px 10px rgba(0, 0, 0, 0.02);
-
-
-
+@import "@/styles/variables.scss";
 
 #add_product_form{
   padding: 24px;
-  box-shadow: $form_box_shadow;
+  box-shadow: $wrap_box_shadow;
   border-radius: 4px;
   background: $bg_color;
   display: flex;
@@ -175,7 +163,7 @@ $form_box_shadow: 0px 20px 30px rgba(0, 0, 0, 0.04), 0px 6px 10px rgba(0, 0, 0, 
   font-size: 12px;
   line-height: 15px;
   text-align: left;
-  color: $placeholder-text-color;
+  color: $placeholder_text_color;
 }
 
 .product_description_textarea{
@@ -213,7 +201,7 @@ $form_box_shadow: 0px 20px 30px rgba(0, 0, 0, 0.04), 0px 6px 10px rgba(0, 0, 0, 
 
 .disabled_btn{
     background: #EEEEEE;
-    color: $placeholder-text-color;
+    color: $placeholder_text_color;
     cursor: default;
 }
 
