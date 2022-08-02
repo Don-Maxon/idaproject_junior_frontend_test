@@ -9,7 +9,9 @@
   </div>
   <div class="aside_main_wrapper">
     <aside class="sidebar">
-      <product-form @addProduct="addNewCard"/>
+      <div class="product_form_wrapper">
+        <product-form @addProduct="addNewCard"/>
+      </div>
     </aside>
     <transition-group name="card_list" tag="main">
       <product-card  
@@ -92,7 +94,6 @@ export default {
     else{
       localStorage.cards = []
     }  
-    // await new Promise(() => setTimeout(() => this.show = true, 1000))
   }
 }
 </script>
@@ -102,16 +103,15 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Source+Sans+Pro&display=swap');
 
-$text-color: #3F3F3F;
-$body-bg-color: #E5E5E5;
-
+$text_color: #3F3F3F;
+$body_bg_color: rgba(255, 254, 251, 0.8);
 
 * {
   box-sizing: border-box;
 }
 
 body{
-  background: rgba(255, 254, 251, 0.8);
+  background: $body_bg_color;
   font-family: 'Source Sans Pro';
   font-weight: 400;
 	font-size: 16px;
@@ -120,8 +120,8 @@ body{
 
 h2{
   height: 35px;
-  font-weight: 600;
   margin: 0;
+  font-weight: 600;
 }
 
 #app {
@@ -138,27 +138,32 @@ h2{
 .top_bar{
   display: flex;
   justify-content: space-between;
-  margin: 0 0 16px 0 ;
+  margin: 0;
 }
 
 .aside_main_wrapper{
   display: flex;
+  position: relative;
 }
 
 aside{
   width: 332px;
-  width: 332px;
+  min-height: 100%;
+}
+
+.product_form_wrapper{
+  padding-top: 24px;
+  position: sticky;
+  top: 0;
 }
 
 main{
-  max-width: 1044px;
-  flex: 1;
   display: flex;
+  flex: 1;
+  justify-content: flex-start; 
   flex-wrap: wrap;
-  justify-content: flex-start;
-    // background: rgb(231, 147, 147);
-
-  
+  padding-top: 24px;
+  max-width: 1044px;
 }
 
 .product_wrapper{
@@ -176,6 +181,7 @@ main{
 .card_list-leave-active {
   transition: all 0.5s ease;
 }
+
 .card_list-enter-from,
 .card_list-leave-to {
   opacity: 0;
