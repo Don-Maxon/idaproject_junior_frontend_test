@@ -90,7 +90,7 @@ export default {
       }
     }
   },
-  mounted: async function(){
+  mounted(){
     
     if(localStorage.cards){
       this.setCards();
@@ -98,7 +98,8 @@ export default {
     else{
       localStorage.cards = []
     }  
-    await new Promise(() => setTimeout(() => this.show = true, 1500));
+    
+    setTimeout(() => this.show = true, 1500);
   }
 }
 </script>
