@@ -6,7 +6,7 @@
 <img src="https://img.shields.io/badge/vue-3.2.13-yellowgreen" >
 
 ### Описание проекта:
-Тестовое задание: страница вывода списка товаров, с возможностью создания/удалиния товаров.
+Тестовое задание: страница вывода списка товаров, с возможностью создания/удалиния карточек товаров.
 
 **Стек:**
 - Vue.js 3.2.13
@@ -30,5 +30,5 @@ npm run serve
 http://localhost:8080/
 ```
 
-Copyright (c) 2022-present, FRRdev - Kritsyn Mikhail
+Copyright (c) 2022-present, Don-Maxon - Chernikov Maxim
 
