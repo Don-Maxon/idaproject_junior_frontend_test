@@ -1,7 +1,7 @@
 <template>
         <div class="card_wrapper">
                 <div class="delete_icon" @click="dleteCardItem">
-                        <img src="../assets/pages/trash_item.png" alt="">
+                        <img src="../assets/images/trash_item.png" alt="">
                 </div>
                 <div class="img_wrapper"> 
                         <img :src="img_url" alt="Изображение товара" >
@@ -29,7 +29,7 @@ export default {
         props: {
                 img_url: {
                         type: String,
-                        default: require('../assets/pages/no_img.png')
+                        default: require('../assets/images/no_img.png')
                 },
                 titel: {
                         type: String,
