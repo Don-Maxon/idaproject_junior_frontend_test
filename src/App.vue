@@ -1,16 +1,16 @@
 <template>
   <preloader v-show="!show"/>
 
-<div class="container" v-show="show">
+<div class="container" ref="container" v-show="show">
   
   <div class="top_bar"> 
-  <h2>Добавление товара</h2> 
+  <h2 @click="scrollToForm">Добавление товара</h2> 
     <sort-select v-model="selector"/>
   </div>
   <div class="aside_main_wrapper">
-    <aside class="sidebar">
+    <aside class="sidebar" >
       <div class="product_form_wrapper">
-        <product-form @addProduct="addNewCard"/>
+        <product-form @addProduct="addNewCard" />
       </div>
     </aside>
     <transition-group name="card_list" tag="main">
@@ -68,8 +68,13 @@ export default {
     },
 
     setCards(){
+      
       this.cards = JSON.parse(localStorage.getItem('cards'));
-    }
+    },
+
+    scrollToForm() {
+        this.$refs.container.scrollIntoView({behavior: 'smooth'});
+    },
   },
   computed:{
     sortCards(){
@@ -126,6 +131,7 @@ h2{
   height: 35px;
   margin: 0;
   font-weight: 600;
+  pointer-events: none;
 }
 
 #app {
@@ -143,6 +149,7 @@ h2{
   display: flex;
   justify-content: space-between;
   margin: 0;
+  top: 0
 }
 
 .aside_main_wrapper{
@@ -176,8 +183,6 @@ main{
 
 }
 
-
-
 .card_list-move,
 .card_list-enter-active,
 .card_list-leave-active {
@@ -199,8 +204,12 @@ main{
 
 @media (max-width: 768px){
 
+  .product_form_wrapper{
+    padding-top: 0;
+  }
+
   .container{
-    padding: 32px 16px;
+    padding: 0 16px 16px;
   }
 
   .aside_main_wrapper{
@@ -212,18 +221,36 @@ main{
     width: 100%;
     margin-bottom: 16px;
   }
+
   main{
     justify-content: space-between;
   }
   .product_wrapper{
-    margin-left: 0px;
+    padding-left: 0px;
     width: 100%;
   }
 
-  .top_bar h2{
-    height: auto;
-    font-size: 1.5em;
+  .top_bar{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    position: sticky;
+    z-index: 100;
+    background: rgba(255, 254, 251);;
   }
+
+  
+  
+  .top_bar h2{
+    min-height: auto;
+    font-size: 1.1em;
+    cursor: pointer;
+    pointer-events: all;
+    
+  }
+
+  
+
 }
 
 </style>
