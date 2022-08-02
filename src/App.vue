@@ -152,12 +152,12 @@ aside{
 
 main{
   max-width: 1044px;
-
   flex: 1;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  padding-left: auto;
+  justify-content: flex-start;
+    // background: rgb(231, 147, 147);
+
   
 }
 
@@ -210,7 +210,5 @@ main{
     font-size: 1.5em;
   }
 }
-
-
 
 </style>

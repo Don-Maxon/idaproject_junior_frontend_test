@@ -59,7 +59,8 @@ export default {
 <style lang="scss">
 .card_wrapper{    
         position: relative; 
-        width: 332px;
+        max-width: 332px;
+        width: 33.0%;
         height: 423px;
         background: #FFFEFB;
         box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.04), 0px 6px 10px rgba(0, 0, 0, 0.02);
@@ -67,7 +68,7 @@ export default {
         display: inline-flex;
         flex-direction: column;
         visibility: visible;
-        margin-left: 16px;
+        margin-left: auto;
         margin-bottom: 16px;
 }
 
@@ -127,10 +128,8 @@ export default {
         margin: 16px 0 32px 0;
 	display: -webkit-box;
 	-webkit-line-clamp: 4;
-	-webkit-box-orient: vertical;
-        
+	-webkit-box-orient: vertical;   
 }
-
 
 .price{
         height: 30px;
@@ -163,8 +162,21 @@ export default {
         opacity: 1;       
 }
 
+@media (max-width: 1440px){
+        .card_wrapper{
+                width: 32.0%;
+        }
+}
+
+@media (max-width: 1280px){
+        .card_wrapper{
+                width: 48%;
+        }
+}
+
 @media (max-width: 768px){
         .card_wrapper{
+                min-width: auto;
                 margin-left: 0;
                 height: auto;
         }
@@ -174,9 +186,9 @@ export default {
         }
 }
 
-@media (max-width: 700px){
+@media (max-width: 640px){
         .card_wrapper{
-                width: 100%;
+                min-width: 100%;
         }
 }
 </style>
