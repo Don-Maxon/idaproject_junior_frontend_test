@@ -1,9 +1,8 @@
 <template>
-  <preloader v-show="!show"/>
-<header class="top_bar" v-show="show"> 
+<preloader v-show="!show"/>
+<header  v-show="show"> 
   <h2 @click="scrollToForm">Добавление товара</h2> 
-  <test-select v-model="testSelector" :options="testOptions"/>
-  <sort-select v-model="selector"/>
+  <sort-select v-model="selector" :options="options"/>
 </header>
 <div class="container"  v-show="show" ref="container">
   <div class="aside_main_wrapper">
@@ -36,20 +35,23 @@
 import ProductForm from "./components/ProductForm.vue"
 import ProductCard from "./components/ProductCard.vue"
 import SortSelect from "./components/SortSelect.vue"
-import TestSelect from "./components/TestSelect.vue"
 import Preloader from "./components/PreLoader.vue"
 import { v4 as uuidv4 } from 'uuid';
 
 export default {
   name: 'App',
-  components: {ProductForm, ProductCard, SortSelect, Preloader, TestSelect},
+  components: {
+    ProductForm, 
+    ProductCard, 
+    Preloader, 
+    SortSelect
+  },
   data(){
     return{
       cards: [],
-      selector: "def",
       show: true,
-      testSelector: {value: "def", name: "По умолчанию"},
-      testOptions: [ 
+      selector: {value: "def", name: "По умолчанию"},
+      options: [ 
         {value: "def", name: "По умолчанию"},
         {value: "min", name: "По цене min"},
         {value: "max", name: "По цене max"},
@@ -87,13 +89,13 @@ export default {
     sortCards(){
       let sortedCards = JSON.parse(JSON.stringify(this.cards))
       
-      if(this.selector === "min"){
+      if(this.selector.value === "min"){
         return sortedCards.sort((a, b) => Number(a.price.replace(/\s/g, '')) > Number(b.price.replace(/\s/g, '')) ? 1 : -1)
-      } else if(this.selector === "max"){
+      } else if(this.selector.value === "max"){
         return sortedCards.sort((a, b) => Number(a.price.replace(/\s/g, '')) < Number(b.price.replace(/\s/g, '')) ? 1 : -1)
-      }else if(this.selector === "name"){
+      }else if(this.selector.value === "name"){
         return sortedCards.sort((x, y) => x.name.localeCompare(y.name));
-      }else if(this.selector === "def"){
+      }else if(this.selector.value === "def"){
         return sortedCards
       } else{
         return sortedCards
@@ -143,7 +145,7 @@ body{
   align-items: center;
 }
 
-.top_bar{
+header{
   display: flex;
   justify-content: space-between;
   max-width: 1440px;
@@ -237,7 +239,7 @@ main{
     width: 100%;
   }
 
-  .top_bar{
+  header{
     padding-top: 10px;
     padding-bottom: 10px;
     position: sticky;
@@ -245,7 +247,7 @@ main{
     background: $bg_color;
   }
 
-  .top_bar{
+  header{
     h2{
       min-height: auto;
       font-size: 1.1em;

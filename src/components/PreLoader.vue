@@ -1,6 +1,6 @@
 <template>
-  <div class="load_container">
-    <span class="loader"></span>
+<div class="load_container">
+  <span class="loader"></span>
 </div>
 </template>
 
