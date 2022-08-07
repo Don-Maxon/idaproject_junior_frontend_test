@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import _cloneDeep from 'lodash.clonedeep';
+
 export default {
         props:{
                 modelValue: {
@@ -24,7 +26,7 @@ export default {
         },
         computed: {
                 getUnchangedVal(){
-                        let newOptions = JSON.parse(JSON.stringify(this.$props.options));
+                        let newOptions = _cloneDeep(this.$props.options);
                         return newOptions.filter((i)=> i.value != this.$props.modelValue.value)
                 }
 
@@ -114,7 +116,5 @@ export default {
                 display: block;
         }
 }
-
-
 </style>
 

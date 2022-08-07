@@ -62,6 +62,7 @@
 <script>
 import useVuelidate from '@vuelidate/core'
 import { required } from '@vuelidate/validators'
+import _cloneDeep from 'lodash.clonedeep';
 
 export default {
     name: 'ProductForm',
@@ -98,7 +99,7 @@ export default {
         addProduct(){
             this.v$.$touch();
             if(!this.v$.$error){
-                const product = JSON.parse(JSON.stringify(this.product_item));
+                const product = _cloneDeep(this.product_item);
                 this.$emit("addProduct", product);
                 this.v$.$reset();
                 this.clearForm();

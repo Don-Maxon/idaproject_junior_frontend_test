@@ -36,6 +36,7 @@ import ProductForm from "./components/ProductForm.vue"
 import ProductCard from "./components/ProductCard.vue"
 import SortSelect from "./components/SortSelect.vue"
 import Preloader from "./components/PreLoader.vue"
+import _cloneDeep from 'lodash.clonedeep';
 import { v4 as uuidv4 } from 'uuid';
 
 export default {
@@ -49,7 +50,7 @@ export default {
   data(){
     return{
       cards: [],
-      show: true,
+      show: false,
       selector: {value: "def", name: "По умолчанию"},
       options: [ 
         {value: "def", name: "По умолчанию"},
@@ -77,7 +78,6 @@ export default {
     },
 
     setCards(){
-      
       this.cards = JSON.parse(localStorage.getItem('cards'));
     },
 
@@ -87,7 +87,8 @@ export default {
   },
   computed:{
     sortCards(){
-      let sortedCards = JSON.parse(JSON.stringify(this.cards))
+
+      let sortedCards = _cloneDeep(this.cards);
       
       if(this.selector.value === "min"){
         return sortedCards.sort((a, b) => Number(a.price.replace(/\s/g, '')) > Number(b.price.replace(/\s/g, '')) ? 1 : -1)
