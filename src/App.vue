@@ -2,7 +2,8 @@
   <preloader v-show="!show"/>
 <header class="top_bar" v-show="show"> 
   <h2 @click="scrollToForm">Добавление товара</h2> 
-    <sort-select v-model="selector"/>
+  <test-select v-model="testSelector" :options="testOptions"/>
+  <sort-select v-model="selector"/>
 </header>
 <div class="container"  v-show="show" ref="container">
   <div class="aside_main_wrapper">
@@ -35,17 +36,26 @@
 import ProductForm from "./components/ProductForm.vue"
 import ProductCard from "./components/ProductCard.vue"
 import SortSelect from "./components/SortSelect.vue"
+import TestSelect from "./components/TestSelect.vue"
 import Preloader from "./components/PreLoader.vue"
 import { v4 as uuidv4 } from 'uuid';
 
 export default {
   name: 'App',
-  components: {ProductForm, ProductCard, SortSelect, Preloader},
+  components: {ProductForm, ProductCard, SortSelect, Preloader, TestSelect},
   data(){
     return{
       cards: [],
       selector: "def",
-      show: false,
+      show: true,
+      testSelector: {value: "def", name: "По умолчанию"},
+      testOptions: [ 
+        {value: "def", name: "По умолчанию"},
+        {value: "min", name: "По цене min"},
+        {value: "max", name: "По цене max"},
+        {value: "name", name: "По наименованию"}
+      ]
+
     }
   },
   methods:{

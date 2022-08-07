@@ -1,5 +1,5 @@
 <template>
-    <form action="" id="add_product_form" onsubmit="return false">
+    <form action="" class="add_product_form" onsubmit="return false">
         <div class="normal_item_wrapper">
             <label for="name_product_input" class="required">Наименование товара</label>
             <input 
@@ -118,7 +118,7 @@ export default {
 <style scoped lang="scss">
 @import "@/styles/variables.scss";
 
-#add_product_form{
+.add_product_form{
   padding: 24px;
   box-shadow: $wrap_box_shadow;
   border-radius: 4px;
